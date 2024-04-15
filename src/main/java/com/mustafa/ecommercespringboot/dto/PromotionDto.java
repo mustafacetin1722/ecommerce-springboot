@@ -14,5 +14,7 @@ public class PromotionDto {
     private String description;
     private double discount;
     private String code;
-    private List<ProductDto> productList;
+    private List<String> productUuid;
+    private String fullName;
+    private Long daysToAdd ;
 }

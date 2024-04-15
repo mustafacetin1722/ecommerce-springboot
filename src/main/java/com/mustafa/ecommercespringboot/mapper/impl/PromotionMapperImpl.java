@@ -5,12 +5,19 @@ import com.mustafa.ecommercespringboot.dto.PromotionDto;
 import com.mustafa.ecommercespringboot.mapper.PromotionMapper;
 import com.mustafa.ecommercespringboot.model.Product;
 import com.mustafa.ecommercespringboot.model.Promotion;
+import com.mustafa.ecommercespringboot.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PromotionMapperImpl implements PromotionMapper {
+    private final ProductRepository productRepository;
+
+    public PromotionMapperImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @Override
     public PromotionDto toPromotionDto(Promotion promotion) {
 
@@ -21,16 +28,9 @@ public class PromotionMapperImpl implements PromotionMapper {
         promotionDto.setDiscount(promotionDto.getDiscount());
         promotionDto.setCode(promotionDto.getCode());
 
-        List<ProductDto> productDtoList = new ArrayList<>();
-        for (Product product : promotion.getProductList()){
-            ProductDto productDto = new ProductDto();
-            productDto.setUuid(product.getUuid());
-            productDto.setName(product.getName());
-            productDto.setDescription(product.getDescription());
-            productDto.setPrice(product.getPrice());
-            productDtoList.add(productDto);
-        }
-        promotionDto.setProductList(productDtoList);
+        List<String> productUuid = promotion.getProductList().stream()
+                .map(product -> product.getUuid()).collect(Collectors.toList());
+        promotionDto.setProductUuid(productUuid);
 
         return promotionDto;
     }
@@ -46,12 +46,9 @@ public class PromotionMapperImpl implements PromotionMapper {
         promotion.setCode(promotionDto.getCode());
 
         List<Product> productList = new ArrayList<>();
-        for (ProductDto productDto : promotionDto.getProductList()) {
-            Product product = new Product();
-            product.setUuid(productDto.getUuid());
-            product.setName(productDto.getName());
-            product.setDescription(productDto.getDescription());
-            product.setPrice(productDto.getPrice());
+        for (String productUuid : promotionDto.getProductUuid()) {
+            Product product = productRepository.findByUuid(productUuid)
+                    .orElseThrow(() -> new RuntimeException("product not found"));
             productList.add(product);
         }
         promotion.setProductList(productList);
