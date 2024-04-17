@@ -1,6 +1,6 @@
 package com.mustafa.ecommercespringboot.dto.reponse;
 
-import com.mustafa.ecommercespringboot.model.Product;
+import com.mustafa.ecommercespringboot.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WishlistResponse {
-    private List<Product> productList;
+    private List<ProductDto> productList;
     private String userUuid;}

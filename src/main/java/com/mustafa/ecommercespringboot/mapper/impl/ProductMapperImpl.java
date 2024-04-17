@@ -22,8 +22,7 @@ public class ProductMapperImpl implements ProductMapper {
                     promotion.getName(),
                     promotion.getDescription(),
                     promotion.getDiscount(),
-                    promotion.getCode(),
-                    null
+                    promotion.getCode()
             );
             promotionDtoList.add(promotionDto);
         }
