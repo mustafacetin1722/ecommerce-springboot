@@ -9,6 +9,7 @@ import com.mustafa.ecommercespringboot.model.Product;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class CategoryMapperImpl implements CategoryMapper {
     @Override
@@ -47,7 +48,7 @@ public class CategoryMapperImpl implements CategoryMapper {
         List<Product> productList = new ArrayList<>();
         for (ProductDto productDto : categoryDto.getProductList()) {
             Product product = new Product();
-            product.setUuid(productDto.getUuid());
+            product.setUuid(UUID.randomUUID().toString());
             product.setName(productDto.getName());
             product.setDescription(productDto.getDescription());
             product.setPrice(productDto.getPrice());
