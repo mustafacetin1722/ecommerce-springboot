@@ -17,7 +17,4 @@ public class PaymentDto {
     private String productUuid;
     private String userUuid;
 
-    public String getUserUuid(){
-        return this.userUuid;
-    }
 }
