@@ -48,16 +48,23 @@ public class ReturnServiceImpl implements ReturnService {
 
     @Override
     public List<ReturnDto> getAllReturns() {
-        return null;
+        List<Return> returnModel = this.returnRepository.findAll();
+        return this.returnMapper.toReturnDtoList(returnModel);
     }
 
     @Override
     public ReturnDto getReturnById(Long returnId) {
-        return null;
+        Return returnModel = this.returnRepository.findById(returnId)
+                .orElseThrow(() -> new RuntimeException("Return not found."));
+        ReturnDto returnDto = this.returnMapper.toReturnDto(returnModel);
+        return returnDto;
     }
 
     @Override
     public void deleteReturn(Long returnId) {
+        Return returnModel = this.returnRepository.findById(returnId)
+                .orElseThrow(() -> new RuntimeException("Return not found."));
+        this.returnRepository.delete(returnModel);
 
     }
 }
