@@ -52,6 +52,8 @@ public class ReturnMapperImpl implements ReturnMapper {
         Product product = this.productRepository.findByUuid(returnDto.getProductUuid())
                 .orElseThrow(() -> new RuntimeException("Product not found with UUID: " + returnDto.getProductUuid()));
         returnModel.setProduct(product);
+        Inventory inventory = product.getInventory();
+        inventory.setQuantity(inventory.getQuantity()+1);
         Cart cart = this.cartRepository.findById(returnDto.getCartId())
                 .orElseThrow(() -> new RuntimeException("Cart not found with ID: " + returnDto.getCartId()));
         returnModel.setCart(cart);
