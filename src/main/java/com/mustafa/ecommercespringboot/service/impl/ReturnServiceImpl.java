@@ -65,6 +65,5 @@ public class ReturnServiceImpl implements ReturnService {
         Return returnModel = this.returnRepository.findById(returnId)
                 .orElseThrow(() -> new RuntimeException("Return not found."));
         this.returnRepository.delete(returnModel);
-
     }
 }
