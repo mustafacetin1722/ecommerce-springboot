@@ -10,4 +10,5 @@ public interface UserService {
     void saveUser(UserDto userDto);
     void updateUser(String uuid, UserDto updatedUserDto);
     void deleteUser(String uuid);
+    void updateWishlistForUser(String userUuid, List<String> productUuids);
 }

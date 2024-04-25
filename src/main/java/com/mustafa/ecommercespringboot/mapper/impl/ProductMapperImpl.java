@@ -17,13 +17,7 @@ public class ProductMapperImpl implements ProductMapper {
 
         List<PromotionDto> promotionDtoList = new ArrayList<>();
         for (Promotion promotion : product.getPromotionList()) {
-            PromotionDto promotionDto = new PromotionDto(
-                    promotion.getUuid(),
-                    promotion.getName(),
-                    promotion.getDescription(),
-                    promotion.getDiscount(),
-                    promotion.getCode()
-            );
+            PromotionDto promotionDto = new PromotionDto();
             promotionDtoList.add(promotionDto);
         }
         return new ProductDto(
